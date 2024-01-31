@@ -1,23 +1,81 @@
-@import '../../styles/variables.module.scss';
+@import "../../styles/variables.module.scss";
 
 .cardBody {
+  display: flex;
+  flex-direction: column;
+
+  width: 320px;
+  height: 500px;
+
+  background-color: #fcfcff;
+
+  overflow: hidden;
+
+  border-radius: 5px;
+
+  gap:.5rem;
+
+  box-sizing: border-box;
+  li:has(img) {
+    height: 268px;
+    background-color: purple;
+    width: 100%;
+  }
+
+  li img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+  }
+}
+
+.cardTitle {
+  margin: 0 15px;
+
+
+  h2 {
+    font-weight: 700;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color:#3C4858;
+
+  }
+  p {
+    color:#3C4858;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+.cardPrice { 
+    margin: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & span:first-child {
+        color:$TagPrice;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+    & span:last-child {
+        background-color: $TagPrice;
+        color:$PrimaryColor;
+
+        border-radius:8px;
+        padding:.5rem;
+    }
+}
+.rooms {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 320px;
-    height: 500px;
-    background-color: #FCFCFF;
-    overflow: hidden;
-    border-radius: 5px;
-    li:has(img){
-        height: 268px;
-        background-color: purple;
-        width: 100%;  
-    }
-    li img {
-        width: 100%;
-        object-fit: cover;
-        height: 100%;
-   
-    }
+    white-space:nowrap;
+    text-overflow: ellipsis;
+
+    margin: 0 15px;
+    gap: 5px;
+
+    color:$TagPrice;
 }

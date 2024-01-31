@@ -10,10 +10,19 @@ export const Card = () => {
       <article>
         <ul className={style.cardBody}>
           <li>
-            <Image src={casa} alt='casa' height={200} width={200} />
+            <Image unoptimized src={casa} alt='casa' height={200} width={200} />
           </li>
-          <li>
-       
+          <li className={style.cardTitle}>
+        <h2>Casa Sobrado em Irecê/BA</h2>
+        <p>Irecê - Bahia</p>
+          </li>
+          <li className={style.cardPrice}>
+            <span>R$ 300,000</span> <span>Venda</span>
+          </li>
+          <li className={style.rooms}>
+            <span> 2 Garagens</span>
+            <span> 4 Cômodos</span>
+            <span> </span>
           </li>
         </ul>
       </article>
