@@ -1,0 +1,23 @@
+@import '../../styles/variables.module.scss';
+
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 320px;
+    height: 500px;
+    background-color: #FCFCFF;
+    overflow: hidden;
+    border-radius: 5px;
+    li:has(img){
+        height: 268px;
+        background-color: purple;
+        width: 100%;  
+    }
+    li img {
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+   
+    }
+}
