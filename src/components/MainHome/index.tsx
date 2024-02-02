@@ -16,6 +16,7 @@ export const MainHome = () => {
         <h1>Imóveis em destaque</h1>
         <Card />
         <Card />   <Card />   <Card />
+        <Card />   <Card />   <Card />
       </section>
     </>
   );

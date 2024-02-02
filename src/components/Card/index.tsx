@@ -3,11 +3,16 @@ import style from "./style.module.scss";
 
 import casa from '../../../public/casa.jpg'
 import Image from "next/image";
+import { FaCar } from "react-icons/fa";
+import { MdOutlineBedroomParent, MdOutlineConstruction  } from "react-icons/md";
+import Link from "next/link";
+
 
 export const Card = () => {
   return (
     <>
       <article>
+        <Link href='/produtos'>
         <ul className={style.cardBody}>
           <li>
             <Image unoptimized src={casa} alt='casa' height={200} width={200} />
@@ -20,11 +25,12 @@ export const Card = () => {
             <span>R$ 300,000</span> <span>Venda</span>
           </li>
           <li className={style.rooms}>
-            <span> 2 Garagens</span>
-            <span> 4 Cômodos</span>
-            <span> </span>
+            <span> <FaCar /> 2 Garagens</span>
+            <span> <MdOutlineBedroomParent />4 Cômodos</span>
+            <span>< MdOutlineConstruction  /> área construida</span>
           </li>
         </ul>
+      </Link>
       </article>
     
     </>
