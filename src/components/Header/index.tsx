@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import style from './style.module.scss'
-
+import { IoMenu } from "react-icons/io5";
 
 export const Header = () => {
 
@@ -15,6 +15,7 @@ export const Header = () => {
                 <li><Link href="/contact">contato</Link></li>
             </ul>
                 </nav>   
+               <span> < IoMenu size={35}/> </span>
         </header>
     )
 }
