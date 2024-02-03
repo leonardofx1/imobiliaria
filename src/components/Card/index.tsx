@@ -12,7 +12,7 @@ export const Card = () => {
   return (
     <>
       <article>
-        <Link href='/produtos'>
+        <Link href='/propertyDetails/1'>
         <ul className={style.cardBody}>
           <li>
             <Image unoptimized src={casa} alt='casa' height={200} width={200} />
