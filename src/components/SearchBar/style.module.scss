@@ -42,7 +42,7 @@
         }
     }
     @media screen and (max-width:780px) {
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         input, button{
             width: 100%;
         }
