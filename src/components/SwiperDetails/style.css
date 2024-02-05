@@ -27,7 +27,8 @@
   color: white;
   background-color: rgba(0, 0, 0, 0.808);
   padding: 1rem;
- }
+}
+
 
  .swiper-button-next {
   color:white;
@@ -35,3 +36,10 @@
   background-color: rgba(0, 0, 0, 0.808);
   padding: 1rem;
  }
+ @media screen and (max-width:780px) {
+  .swiper-button-prev, .swiper-button-next {
+  
+    padding: .2rem;
+
+  }
+}

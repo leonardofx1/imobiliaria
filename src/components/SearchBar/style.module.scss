@@ -11,7 +11,9 @@
 
     gap:1rem;
 
-    background-color: #F6EEE5;
+    background-color: $BrownLigth;
+    box-sizing: border-box;
+ 
     input {
         width: 90%;
         padding: 1rem;
@@ -21,14 +23,28 @@
         border-radius: 15px;
     }
     button {
+        margin: 5px;
         padding: 1rem;
-        color:black;
+
+        background-color:$BrownBold;
+        color: whitesmoke;
+
         border: none;
-       
         border-radius: 5px;
 
         font-weight: bold;
 
         cursor: pointer;
+        transition: all 1s ease-in-out;
+
+        &:hover {
+            opacity: .8;
+        }
+    }
+    @media screen and (max-width:780px) {
+        flex-wrap: nowrap;
+        input, button{
+            width: 100%;
+        }
     }
 }
