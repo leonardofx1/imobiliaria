@@ -27,7 +27,7 @@ export const Card = () => {
           <li className={style.rooms}>
             <span> <FaCar /> 2 Garagens</span>
             <span> <MdOutlineBedroomParent />4 Cômodos</span>
-            <span>< MdOutlineConstruction  /> área construida</span>
+            <span>< MdOutlineConstruction  /> 152m² área construida</span>
           </li>
         </ul>
       </Link>

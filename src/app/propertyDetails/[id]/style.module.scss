@@ -1,18 +1,59 @@
-
-
+@import '@../../../../../styles/variables.module.scss';
 .containerMain {
     max-width: 1280px;
     height: auto;
     width: 100%;
 
     margin: 0 auto;
+}
+
+.containerImg {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
 
 
-    section {
+}
+
+.containerTitle {
+    width: 100%;
+    height: 150px;
+    background-color:$BrownLigth;
+    padding: 1rem;
+
+
+    h1 {
+        color: $FontColor;
+        font-weight: bold;
+        font-size: 2rem;
+    }
+
+    h2 {
+        color: $BrownBold;
+        font-size: 1.6rem;
+        font-weight: bold;
+    }
+}
+
+.listOfFeatures { 
+    max-width: 833px;
+    width: 100%;
+    padding: 1rem;
+    h3 {
+        margin: 1rem 0;
+        display: block;
+        color:$FontColor;
+    }
+    div {
         display: flex;
-        justify-content: center;
-        width:100%;
-        height: 1000px;
-      
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    div span {
+        background-color:$BrownLigth;
+        color:$FontColor;
+        border-radius: 15px;
+        padding:.5rem;
     }
 }

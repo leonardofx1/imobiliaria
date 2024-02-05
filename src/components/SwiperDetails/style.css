@@ -10,9 +10,7 @@
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-   
-  
-    /* Center slide text vertically */
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,4 +23,15 @@
     object-fit: cover;
   }
   
+ .swiper-button-prev {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.808);
+  padding: 1rem;
+ }
+
+ .swiper-button-next {
+  color:white;
  
+  background-color: rgba(0, 0, 0, 0.808);
+  padding: 1rem;
+ }
