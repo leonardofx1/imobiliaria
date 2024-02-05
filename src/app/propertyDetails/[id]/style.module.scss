@@ -5,6 +5,7 @@
     width: 100%;
 
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .containerImg {
@@ -12,17 +13,27 @@
     justify-content: center;
     width: 100%;
     margin: 0 auto;
-
-
 }
 
 .containerTitle {
+    position: relative;
     width: 100%;
     height: 150px;
     background-color:$BrownLigth;
     padding: 1rem;
 
-
+    box-sizing: border-box;
+    &::after {
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        background-color:$BrownLigth;
+        width: 100vw;
+        left: -50px;
+        top: 0;
+        z-index: -1;
+    }
     h1 {
         color: $FontColor;
         font-weight: bold;
@@ -40,6 +51,7 @@
     max-width: 833px;
     width: 100%;
     padding: 1rem;
+    box-sizing: border-box;
     h3 {
         margin: 1rem 0;
         display: block;
