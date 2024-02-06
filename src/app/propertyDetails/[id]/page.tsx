@@ -1,5 +1,7 @@
+import Image from "next/image";
 import style from "./style.module.scss";
 import { SwiperDetails } from "@/components/SwiperDetails";
+import whatsapp from '../../../../public/whatssapp.jpg'
 
 const PropertyDetails = ({ params }: { params: { id: string } }) => {
   return (
@@ -54,6 +56,7 @@ const PropertyDetails = ({ params }: { params: { id: string } }) => {
           </p>
         </div>
       </section>
+      <Image className={style.whatsapp} src={whatsapp} height={50} width={50} alt="whatsapp" /> 
     </main>
   );
 };
