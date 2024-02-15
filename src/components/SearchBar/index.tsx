@@ -9,7 +9,7 @@ import style from './style.module.scss'
     return (
 
         <form >
-            <div className={style.containerSearch}>   <input type="text" /><button>Buscar</button></div>
+            <div className={style.containerSearch}>   <input type="text" placeholder="pesquisar" /><button>Pesquisar</button></div>
         </form>
         
     )
