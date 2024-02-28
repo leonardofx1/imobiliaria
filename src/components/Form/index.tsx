@@ -5,17 +5,31 @@ import { db, storage } from "@/utils/firebase/firebaseSdk";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import style from "./style.module.scss";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+export interface PropertyType {
+  tipoImovel: string;
+  cep: string;
+  cidade: string;
+  bairro: string;
+  endereco: string;
+  complemento: string;
+  numero: string;
+  descricao: string;
+  estado: string;
+}
+
 
 export const Form = () => {
   const { register, handleSubmit, control } = useForm();
 
-  const onSubmit = async  (data) => {
+  const router = useRouter()
+  const onSubmit = async  (data:PropertyType):void => {
     console.log(data);
     const docRef = collection(db, 'property')
     const addProperty  = await addDoc(docRef, data)
     const toUpdateDoc = doc(db, 'property', addProperty.id)
     const res = await  updateDoc(toUpdateDoc,{id: addProperty.id} )
-
+    router.push(`/admin/config/addImage/${addProperty.id}`)
   };
 
   return (
