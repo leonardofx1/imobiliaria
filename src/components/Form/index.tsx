@@ -1,11 +1,12 @@
-'use client'
+"use client";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import { db, storage } from "@/utils/firebase/firebaseSdk";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 import style from "./style.module.scss";
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+
+import { InputForm } from "./inputForm";
+import { handleCreateProperty } from "@/utils/firebase/firebaseUtils";
+
 export interface PropertyType {
   tipoImovel: string;
   cep: string;
@@ -18,22 +19,11 @@ export interface PropertyType {
   estado: string;
 }
 
-
 export const Form = () => {
   const { register, handleSubmit, control } = useForm();
 
-  const router = useRouter()
-  const onSubmit = async  (data:PropertyType):void => {
-    console.log(data);
-    const docRef = collection(db, 'property')
-    const addProperty  = await addDoc(docRef, data)
-    const toUpdateDoc = doc(db, 'property', addProperty.id)
-    const res = await  updateDoc(toUpdateDoc,{id: addProperty.id} )
-    router.push(`/admin/config/addImage/${addProperty.id}`)
-  };
-
   return (
-    <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
+    <form className={style.form} onSubmit={handleSubmit(handleCreateProperty)}>
       <div>
         <h2 className={style.title}>Adicionar Imóvel </h2>
 
@@ -98,32 +88,49 @@ export const Form = () => {
               />
             </div>
             <div>
-              <span>Cidade</span>
-              <input type="text" {...register("cidade")} placeholder="Cidade" />
-            </div>
-            <div>
-              <span>Bairro</span>
-              <input type="text" {...register("bairro")} placeholder="Bairro" />
-            </div>
-            <div>
-              <span>Endereço</span>
-              <input
+              <InputForm
+                label="Cidade"
                 type="text"
-                {...register("endereco")}
-                placeholder="Endereço"
+                nameRegister="city"
+                register={register}
+                placeholder="Cidade"
               />
             </div>
             <div>
-              <span>Complemento</span>
-              <input
+              <InputForm
+                label="Bairro"
                 type="text"
-                {...register("complemento")}
+                nameRegister="bairro"
+                register={register}
+                placeholder="Bairro"
+              />
+            </div>
+            <div>
+              <InputForm
+                type="text"
+                label="Endereço"
+                nameRegister="address"
+                register={register}
+                placeholder="endereço"
+              />
+            </div>
+            <div>
+              <InputForm
+                type="text"
+                label="Complemento"
+                nameRegister="complement"
+                register={register}
                 placeholder="Complemento"
               />
             </div>
             <div className={style.addressNumber}>
-              <span>Número</span>
-              <input type="text" {...register("numero")} placeholder="Numero" />
+              <InputForm
+                label="Número"
+                type="number"
+                nameRegister="number"
+                register={register}
+                placeholder="Número"
+              />
             </div>
           </div>
         </section>

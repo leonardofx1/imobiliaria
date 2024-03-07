@@ -7,7 +7,7 @@
   min-width: 300px;
   min-height: 420px;
   height: auto;
-
+  max-width: 350px;
   background-color: #fcfcff;
 
   overflow: hidden;
@@ -18,7 +18,7 @@
 
   box-sizing: border-box;
 
-  box-shadow: .1px .1px 5px $TagPrice;
+ border:1px solid rgba(0, 0, 0, 0.301);
 
   cursor: pointer;
 
@@ -41,6 +41,7 @@
 
 .cardTitle {
   margin: 0 15px;
+  height: 50px;
 
 
   h2 {

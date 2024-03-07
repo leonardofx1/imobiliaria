@@ -1,22 +1,35 @@
-import Image from "next/image";
-import casa from "../../../public/casa.jpg";
+
 import style from "./style.module.scss";
 import { SearchBar } from "../SearchBar";
 import { Card } from '../Card/index';
+import {collection, getDocs} from "firebase/firestore"
+import { db } from "@/utils/firebase/firebaseSdk";
+import { CardDetail } from "../CardDetail";
+export interface Property {
+  bairro: string;
+  cep: string;
+  cidade: string;
+  complemento: string;
+  descricao: string;
+  endereco: string;
+  estado: string;
+  id: string;
+  imageUrls: string[];
+  numero: string;
+  tipoImovel: string;
+}
+export const MainHome = async () => {
+  const snap= await getDocs(collection(db, "property"))
+    const dataProperty:Property[] = snap.docs.map((item) => item.data() as Property)
 
-export const MainHome = () => {
   return (
     <>
-      <section className={style.containerImg}>
-        <Image src={casa} alt="casa" unoptimized height={500} width={500} />
-        <span>aqui você encontra os melhores imovéis.</span>
-      </section>
+    
       <SearchBar />
       <section className={style.propertiesFeatured}>
         <h1>Imóveis em destaque</h1>
-        <Card />
-        <Card />   <Card />   <Card />
-        <Card />   <Card />   <Card />
+        <CardDetail />
+        {dataProperty?.map( (data:Property) => <Card {...data} />)}
       </section>
     </>
   );

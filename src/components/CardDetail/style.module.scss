@@ -1,0 +1,52 @@
+@import "../../styles/variables.module.scss";
+
+.cardContainer {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: $ColorEmphasis;
+    height: 550px;
+
+}
+
+.cardBody {
+    display: grid;
+    grid-template-columns: 500px 1fr;
+    
+    width: 90%;
+    margin: 0 auto;
+    height: 500px;
+  
+    color: white;
+    div {
+        grid-column: 2;
+        padding: 0 .5rem;
+        display: flex;
+        flex-direction: column;
+        
+
+        gap: 1rem;
+  
+        height: 90%;
+        margin: 1rem;
+     
+    }
+  
+}
+.image  {
+    grid-column: 1;
+   
+    height: 90%;
+    width: 100%;
+    object-fit: cover;
+}
+.cardTitle {
+    width: 100%;
+
+    align-self: start;
+}
+.rooms {
+    display: flex;
+    gap: 1rem;
+}

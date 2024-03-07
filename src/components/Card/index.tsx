@@ -6,9 +6,10 @@ import Image from "next/image";
 import { FaCar } from "react-icons/fa";
 import { MdOutlineBedroomParent, MdOutlineConstruction  } from "react-icons/md";
 import Link from "next/link";
+import { Property } from "../MainHome";
 
 
-export const Card = () => {
+export const Card = ({descricao, cidade, estado}:Property) => {
   return (
     <>
       <article>
@@ -18,8 +19,8 @@ export const Card = () => {
             <Image unoptimized src={casa} alt='casa' height={200} width={200} />
           </li>
           <li className={style.cardTitle}>
-        <h2>Casa Sobrado em Irecê/BA</h2>
-        <p>Irecê - Bahia</p>
+        <h2>{descricao}</h2>
+        <p>{cidade} - {estado}</p>
           </li>
           <li className={style.cardPrice}>
             <span>R$ 300,000</span> <span>Venda</span>
