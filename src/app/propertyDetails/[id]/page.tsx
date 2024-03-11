@@ -1,13 +1,14 @@
 import Image from "next/image";
 import style from "./style.module.scss";
-import { SwiperDetails } from "@/components/SwiperDetails";
-import whatsapp from '../../../../public/whatssapp.jpg'
-
+import whatssapp from '../../../../public/whatssapp.png'
+import casa from  '../../../../public/casa.jpg'
 const PropertyDetails = ({ params }: { params: { id: string } }) => {
   return (
     <main className={style.containerMain}>
       <section className={style.containerImg}>
-        <SwiperDetails />
+      <Image src={casa} height={200} width={200} alt="casa" unoptimized quality={100}/> 
+      <Image src={casa} height={200} width={200} alt="casa" unoptimized quality={100}/> 
+
       </section>
       <section className={style.containerTitle}>
         <h1>Casa em Condomínio com 5 dormitórios em irecê</h1>
@@ -56,7 +57,7 @@ const PropertyDetails = ({ params }: { params: { id: string } }) => {
           </p>
         </div>
       </section>
-      <Image className={style.whatsapp} src={whatsapp} height={50} width={50} alt="whatsapp" /> 
+      <Image className={style.whatsapp} src={whatssapp} height={50} width={50} alt="whatsapp" /> 
     </main>
   );
 };

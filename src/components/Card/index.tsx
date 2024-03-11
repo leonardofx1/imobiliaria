@@ -16,7 +16,7 @@ export const Card = ({descricao, cidade, estado}:Property) => {
         <Link href='/propertyDetails/1'>
         <ul className={style.cardBody}>
           <li>
-            <Image unoptimized src={casa} alt='casa' height={200} width={200} />
+            <Image className={style.cardImage} unoptimized src={casa} alt='casa' height={200} width={200} />
           </li>
           <li className={style.cardTitle}>
         <h2>{descricao}</h2>

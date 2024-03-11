@@ -5,7 +5,10 @@ import { useForm, Controller } from "react-hook-form";
 import style from "./style.module.scss";
 
 import { InputForm } from "./inputForm";
-import { handleCreateProperty } from "@/utils/firebase/firebaseUtils";
+
+import { useFireBase } from "../hooks/useFireBase";
+
+
 
 export interface PropertyType {
   tipoImovel: string;
@@ -21,6 +24,7 @@ export interface PropertyType {
 
 export const Form = () => {
   const { register, handleSubmit, control } = useForm();
+  const {handleCreateProperty} = useFireBase()
 
   return (
     <form className={style.form} onSubmit={handleSubmit(handleCreateProperty)}>

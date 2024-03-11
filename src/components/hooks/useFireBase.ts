@@ -3,12 +3,12 @@ import { getDownloadURL,  ref, uploadBytesResumable } from "firebase/storage";
 
 import { PropertyType } from '@/components/Form'; 
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
-import { redirect } from 'next/navigation'
+
 import { useRouter } from 'next/router';
 
 
 
-export const useFireBase  = ({params})=> {
+export const useFireBase  = ()=> {
 
     const handleAddImage = (data) => {
 
@@ -53,5 +53,5 @@ export const useFireBase  = ({params})=> {
     const router = useRouter();
     router.push(`/admin/config/addImage/${addProperty.id}`);
   }
-  return{handleAddImage}
+  return{handleAddImage, handleCreateProperty}
 }

@@ -1,26 +1,31 @@
 'use client'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import './style.css'
-import { Pagination, Navigation, Autoplay } from 'swiper/modules'
+import React, { useRef, useState } from 'react';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-export const SwiperDetails = () => {
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+
+// import required modules
+import { Pagination, Navigation } from 'swiper/modules';
+
+import './style.css'
+export const SwiperDetails = ({children}:{children:React.ReactNode}) => {
   return (
     <>
       <Swiper
-        slidesPerView={1}
-        spaceBetween={30}
-        loop={true}
-        pagination={{ clickable: true }}
+        pagination={{
+          type: 'progressbar',
+        }}
         navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
-        autoplay={{delay:5000,disableOnInteraction:false}}
+        modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide><img src='/casa.jpg' alt="Descrição da imagem" /></SwiperSlide>
-        <SwiperSlide><img src='/casa.jpg' alt="Descrição da imagem" /></SwiperSlide>
+        <SwiperSlide>{children}</SwiperSlide>
+        <SwiperSlide>{children}</SwiperSlide>
       </Swiper>
     </>
   )

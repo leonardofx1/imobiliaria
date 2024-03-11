@@ -11,9 +11,18 @@
 
 .containerImg {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+ 
     width: 100%;
+    height: 100vh;
     margin: 0 auto;
+    background-color: $ColorEmphasis;
+    & img {
+        height: 500px;
+        width: 500px;
+       
+    }
 }
 
 .containerTitle {

@@ -4,10 +4,11 @@ import { MdOutlineBedroomParent, MdOutlineConstruction } from 'react-icons/md';
 import Image from 'next/image';
 import Link from 'next/link';
 import casa from  '../../../public/casa.jpg'
+import { SwiperDetails } from '../SwiperDetails';
 export const CardDetail = () => {
     return (
       <section className={style.cardContainer}>
-        <article>
+     <SwiperDetails><article>
           <Link href='/propertyDetails/1'>
           <ul className={style.cardBody}>
             <li>
@@ -29,7 +30,7 @@ export const CardDetail = () => {
             </div>
           </ul>
         </Link>
-        </article>
+        </article></SwiperDetails>
       
       </section>
     );
