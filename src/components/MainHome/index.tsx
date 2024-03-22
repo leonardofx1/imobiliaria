@@ -5,6 +5,7 @@ import { Card } from '../Card/index';
 import {collection, getDocs} from "firebase/firestore"
 import { db } from "@/utils/firebase/firebaseSdk";
 import { CardDetail } from "../CardDetail";
+
 export interface Property {
   bairro: string;
   cep: string;

@@ -1,3 +1,4 @@
+import { SearchCard } from './SearchCard'
 import { SearchForm } from './SearchForm'
 import style from  './style.module.scss'
 
@@ -10,6 +11,7 @@ import style from  './style.module.scss'
     return (
         <main className={style.main}>
                 <SearchForm /> 
+                <SearchCard /><SearchCard /><SearchCard />
         </main>
     )
  } 

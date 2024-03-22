@@ -3,13 +3,13 @@
 .form{
     display: flex;
     
-    max-width: 980px;
+    max-width: 800px;
     width: 100%;
     
     margin: 0 auto;
  
     max-height: 100px;
-
+  
     input {
         margin: .5rem;
         height: 40px;
@@ -39,6 +39,7 @@
         cursor: pointer;
 
         transition: all 300ms ease-in-out;
+        border: 1px solid rgba(252, 239, 239, 0.233);
         &:hover {
             background-color: #48528777;
         }
