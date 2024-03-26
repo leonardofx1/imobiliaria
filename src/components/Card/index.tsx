@@ -6,7 +6,8 @@ import Image from "next/image";
 import { FaCar } from "react-icons/fa";
 import { MdOutlineBedroomParent, MdOutlineConstruction  } from "react-icons/md";
 import Link from "next/link";
-import { Property } from "../MainHome";
+import { Property } from "../types/typeProperty";
+
 
 
 export const Card = ({descricao, cidade, estado}:Property) => {

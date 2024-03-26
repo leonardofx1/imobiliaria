@@ -10,8 +10,10 @@ import style from  './style.module.scss'
 
     return (
         <main className={style.main}>
-                <SearchForm /> 
+           <div className={style.container}>
+                 <SearchForm /> 
                 <SearchCard /><SearchCard /><SearchCard />
+           </div>
         </main>
     )
  } 

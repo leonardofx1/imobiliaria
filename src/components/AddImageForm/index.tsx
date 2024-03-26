@@ -2,22 +2,22 @@
 import { IdType } from '@/app/admin/config/addImage/[imagePropertyId]/page'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { useFireBase } from '../hooks/useFireBase'
-
+import { handleAddImage } from '../services/firebase'
+import style from './style.module.scss'
 
 
 
 export const AddImageForm = ({params}:IdType) =>  {
   const {register, handleSubmit} = useForm()
-  const {handleAddImage} = useFireBase(params={params})
-  console.log(params, 'add')
+ 
+
   return (
-    <form onSubmit={handleSubmit(handleAddImage)}>
+    <form className={style.form} onSubmit={handleSubmit((data) => handleAddImage(data, params))}>
       <label htmlFor="">
         adicionar imagem
-      <input type="file" name="image" id="" multiple {...register('image')} />
+      <input type="file"  id="" multiple {...register('image')} />
       </label>
-      <button>ola</button>
+      <button type='submit'> Enviar</button>
     </form>
   )
 }

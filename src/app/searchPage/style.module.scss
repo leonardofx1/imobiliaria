@@ -1,16 +1,30 @@
 @import '../../styles/variables.module.scss';
 
 .main {
-    display: flex;
-    flex-wrap: wrap;
+
 
     min-height:100vh ;
-    max-height: auto;
+    height: auto;
     gap: 1rem;
    
     width: 100%;
-    top:100px;
-    position: absolute;
-    background-color:$BrownLigth;
+    padding: 6rem 0 0 0;
+
+
 }
+.container {
+    
+        display: flex;
+        flex-wrap: wrap;
+    
+        min-height:100vh ;
+        max-height: auto;
+        gap: 1rem;
+       
+        width: 100%;
+
+        background-color:$BrownLigth;
+    
+}
+
 

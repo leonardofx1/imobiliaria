@@ -6,9 +6,7 @@ import style from "./style.module.scss";
 
 import { InputForm } from "./inputForm";
 
-import { useFireBase } from "../hooks/useFireBase";
-
-
+import useCreateProperty from "@/utils/firebase/addProperty";
 
 export interface PropertyType {
   tipoImovel: string;
@@ -24,24 +22,13 @@ export interface PropertyType {
 
 export const Form = () => {
   const { register, handleSubmit, control } = useForm();
-  const {handleCreateProperty} = useFireBase()
 
+  const { createProperty } = useCreateProperty();
   return (
-    <form className={style.form} onSubmit={handleSubmit(handleCreateProperty)}>
+    <form className={style.form} onSubmit={handleSubmit(createProperty)}>
       <div>
         <h2 className={style.title}>Adicionar Imóvel </h2>
 
-        <div className={style.containerTypeProperty}>
-          <strong>Seu Imóvel è:</strong>
-          <label htmlFor="">
-            <input type="radio" {...register("tipoImovel")} value="Terreno" />
-            Terreno
-          </label>
-          <label htmlFor="">
-            <input type="radio" {...register("tipoImovel")} value="Imovel" />
-            Imóvel
-          </label>
-        </div>
         <section>
           <div className={style.containerCep}>
             <strong>Onde fica o imóvel?</strong>
@@ -54,7 +41,7 @@ export const Form = () => {
             <div>
               <span>UF</span>
               <Controller
-                name="estado"
+                name="state"
                 control={control}
                 render={({ field }) => (
                   <select {...field}>
@@ -104,7 +91,7 @@ export const Form = () => {
               <InputForm
                 label="Bairro"
                 type="text"
-                nameRegister="bairro"
+                nameRegister="district"
                 register={register}
                 placeholder="Bairro"
               />
@@ -136,6 +123,35 @@ export const Form = () => {
                 placeholder="Número"
               />
             </div>
+            <section className={style.rooms}>
+              <div>
+                <InputForm
+                  label="Área construída "
+                  type="number"
+                  nameRegister="bultUpArea"
+                  register={register}
+                  placeholder="Área construída"
+                />
+              </div>
+              <div>
+                <InputForm
+                  label="Garagens"
+                  type="number"
+                  nameRegister="garage"
+                  register={register}
+                  placeholder="Garagem"
+                />
+              </div>
+              <div>
+                <InputForm
+                  label="cômodos"
+                  type="number"
+                  nameRegister="rooms"
+                  register={register}
+                  placeholder="Cômodos"
+                />
+              </div>
+            </section>
           </div>
         </section>
         <section className={style.descriptionProperty}>
@@ -146,7 +162,7 @@ export const Form = () => {
             ventilação, iluminação, etc.
           </p>
           <textarea
-            {...register("descricao")}
+            {...register("description")}
             placeholder="descrição"
           ></textarea>
         </section>

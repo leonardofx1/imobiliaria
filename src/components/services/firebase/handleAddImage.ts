@@ -1,16 +1,10 @@
-import { db, storage } from '@/utils/firebase/firebaseSdk';
-import { getDownloadURL,  ref, uploadBytesResumable } from "firebase/storage";
-
-import { PropertyType } from '@/components/Form'; 
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
-
-import { useRouter } from 'next/router';
+import { db, storage } from "@/utils/firebase/firebaseSdk";
+import { doc, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 
 
-export const useFireBase  = ()=> {
-
-    const handleAddImage = (data) => {
+export const handleAddImage = (data , params) => {
 
     const files = data.image;
   
@@ -41,17 +35,4 @@ export const useFireBase  = ()=> {
     Promise.all(uploadPromises).then((downloadURLs) => {
       // Atualiza o documento com todas as URLs de download
       updateDoc(doc(db, 'property', params.imagePropertyId), { imageUrls: downloadURLs });
-    });
-
-  }
-  const handleCreateProperty = async(propertyData:PropertyType) => {
-
-    const docRef = collection(db, "property");
-    const addProperty = await addDoc(docRef, propertyData);
-    const toUpdateDoc = doc(db, "property", addProperty.id);
-    const res = await updateDoc(toUpdateDoc, { id: addProperty.id });
-    const router = useRouter();
-    router.push(`/admin/config/addImage/${addProperty.id}`);
-  }
-  return{handleAddImage, handleCreateProperty}
-}
+    })}
