@@ -19,7 +19,7 @@ export class UserCreateService {
     return id;
   };
   findByUserEmail = async (email: string) => {
-    const getUser = await this.memoryDb.findByEmail(email);
+    const getUser = await this.memoryDb.findByEmail(email);     
     if (getUser) {
       throw new UserAlreadyExists();
     }

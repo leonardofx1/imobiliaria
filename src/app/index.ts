@@ -1,7 +1,8 @@
 import fastify from "fastify";
+import { userRoutes } from "../routes/user/user.routes.js";
 
 const server = fastify()
-
+server.register(userRoutes)
 
 
 
