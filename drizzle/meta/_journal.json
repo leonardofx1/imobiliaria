@@ -8,6 +8,13 @@
       "when": 1754646123344,
       "tag": "0000_slimy_tusk",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1754989120690,
+      "tag": "0001_striped_lady_ursula",
+      "breakpoints": true
     }
   ]
 }

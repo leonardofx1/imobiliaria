@@ -20,7 +20,7 @@ export class UserCreateService {
   };
   findByUserEmail = async (email: string) => {
     const getUser = await this.memoryDb.findByEmail(email);     
-    if (getUser) {
+    if ((getUser ?? []).length>0 ) {
       throw new UserAlreadyExists();
     }
   };
