@@ -12,17 +12,17 @@ export class UserLoginService {
     login =  async (user: UserLoginDto) => {
         
        const getUser = await  this.userDb.findByEmail(user.email)
-       if(!getUser && ! getUser[0] ) {
+       if(!getUser  || getUser.length <= 0  ) {
          throw new UserNotFound()
        }
        
        const comparePass = await  this.cryptgraph.compare(user.password,getUser[0]!.password)
-        if(comparePass){
-            const {email, id} = getUser[0] as IUserReturnLogin
-            return new UserReturnLoginDto(id,email)
-        }{
+        if(!comparePass){
             throw  new CredentialsInvalid()
         }
+        const {email, id,age,name,role} = getUser[0] as IUserReturnLogin
+        return new UserReturnLoginDto(id,name,email,age,role?? 'user')
+        
      
 
     }

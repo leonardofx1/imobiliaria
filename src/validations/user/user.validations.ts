@@ -8,3 +8,8 @@ export const createUserValidation = z.object({
     role:z.enum(['user', 'admin']).default('user')
 
 })
+
+export const loginUserValidate = z.object({
+    email:z.email({message:'Formato de e-mail inválido.'}),
+    password:z.string().min(5,{message:'A senha deve conter o mínimo de 5 caracteres.'})
+})

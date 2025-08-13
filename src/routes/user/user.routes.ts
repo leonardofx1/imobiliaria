@@ -7,4 +7,5 @@ export const userRoutes = (app:FastifyInstance) => {
     const userControler = new UserController()
 
     app.post('/user', userControler.save)
+    app.post('/user/login',userControler.login)
 }
