@@ -12,7 +12,7 @@ export class UserLoginDto {
 
 export class UserReturnLoginDto {
     constructor(public id:string ,public name:string, public email:string, public age:number, public role?:UserRoles) {
-        this.id= 
+        this.id= id
         this.name = name
         this.age = age
         this.email = email

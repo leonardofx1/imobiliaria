@@ -2,9 +2,10 @@ import { UserReturnLoginDto, type UserLoginDto } from "../../dto/userDto.js";
 import { CredentialsInvalid, UserNotFound } from "../../error/user/user.error.js";
 import type { IUserRepository, IUserReturnLogin } from "../../repository/user/IUserRepository.js";
 import type { ICryptgraph } from "../../utils/credentials/cryptograph.js";
+import type { IUserLoginService } from "./types/IUserLoginService.js";
 
 
-export class UserLoginService {
+export class UserLoginService implements IUserLoginService {
     constructor(private userDb:IUserRepository, private cryptgraph : ICryptgraph){
 
     }

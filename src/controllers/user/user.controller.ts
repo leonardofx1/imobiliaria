@@ -3,7 +3,7 @@ import { createUserValidation, loginUserValidate } from "../../validations/user/
 
 import { CreateUserDto, UserLoginDto } from "../../dto/userDto.js";
 import { CredentialsInvalid, UserAlreadyExists, UserNotFound } from "../../error/user/user.error.js";
-import { createUserFactory } from "../../factory/user/CreateUser.factory.js";
+
 import { LoginUserFactory } from "../../factory/user/loginUser.factory.js";
 
 export class UserController {
