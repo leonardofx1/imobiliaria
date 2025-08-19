@@ -15,6 +15,41 @@
       "when": 1754989120690,
       "tag": "0001_striped_lady_ursula",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1755565195404,
+      "tag": "0002_daily_groot",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1755565272135,
+      "tag": "0003_perpetual_gideon",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1755565353422,
+      "tag": "0004_parallel_blindfold",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1755565381212,
+      "tag": "0005_minor_switch",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1755565517213,
+      "tag": "0006_lucky_maelstrom",
+      "breakpoints": true
     }
   ]
 }

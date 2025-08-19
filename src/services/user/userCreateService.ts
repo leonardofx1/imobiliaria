@@ -2,8 +2,9 @@ import { CreateUserDto } from "../../dto/userDto.js";
 import { UserAlreadyExists } from "../../error/user/user.error.js";
 import type { IUserRepository } from "../../repository/user/IUserRepository.js";
 import type { ICryptgraph } from "../../utils/credentials/cryptograph.js";
+import type { IUserCreateService } from "./types/IUserCreateService.js";
 
-export class UserCreateService {
+export class UserCreateService implements IUserCreateService{
   constructor(
     private memoryDb: IUserRepository,
     private cryptgraph: ICryptgraph

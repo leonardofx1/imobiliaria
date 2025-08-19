@@ -4,10 +4,12 @@ import { createUserValidation, loginUserValidate } from "../../validations/user/
 import { CreateUserDto, UserLoginDto } from "../../dto/userDto.js";
 import { CredentialsInvalid, UserAlreadyExists, UserNotFound } from "../../error/user/user.error.js";
 
-import { LoginUserFactory } from "../../factory/user/loginUser.factory.js";
+
+import type { IUserCreateService } from "../../services/user/types/IUserCreateService.js";
+import type { IUserLoginService } from "../../services/user/types/IUserLoginService.js";
 
 export class UserController {
-  consatructor() {}
+  constructor(private createUser: IUserCreateService , private loginUser : IUserLoginService) {}
 
   save = async (req: FastifyRequest, reply: FastifyReply) => {
     try {
@@ -15,7 +17,7 @@ export class UserController {
         req.body
       );
 
-      const userService = await createUserFactory().save(
+      const userService = await this.createUser.save(
         new CreateUserDto(name, email, password, age, role)
       );
       reply.status(200).send({ message: "Usuário criado com sucesso." });
@@ -29,7 +31,7 @@ export class UserController {
     try {
       const { email, password } = loginUserValidate.parse(req.body)
         const userDto = new UserLoginDto(email,password)
-        const userLog = LoginUserFactory().login(userDto)
+        const userLog = this.loginUser.login(userDto)
         reply.status(200).send(userLog)
     } catch (error) {
         if(error instanceof CredentialsInvalid){
