@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
-import type { CreateUserDto, UserLoginDto, UserReturnLoginDto } from "../../dto/userDto.js";
-import type { IUserRepository, IUserReturnLogin } from "./IUserRepository.js";
+import type { CreateUserDto} from "../../dto/userDto.js";
+import type { IUserRepository } from "./IUserRepository.js";
 import { users } from "../../db/schema.js";
 
 export class UserRepository implements IUserRepository {

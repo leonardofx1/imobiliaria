@@ -21,7 +21,7 @@ export const users = pgTable('users', {
 })
 
 export const property = pgTable('property', {
-  id:integer('id').notNull().primaryKey(),
+  id:uuid('id').notNull().primaryKey(),
   city:varchar('city',{length:30}),
   number:integer('number'),
   street:text('street').notNull(),
@@ -39,8 +39,8 @@ export const property = pgTable('property', {
 
 })
 export const expenses = pgTable('expenses', {
-  id:integer('id').primaryKey().notNull(),
-  imovelId:integer('propertyId').notNull().references(()=> property.id),
+  id:uuid('id').primaryKey().notNull(),
+  idProperty:uuid('idProperty').notNull().references(()=> property.id),
   condoFee:numeric('condoFee'),
   propertyTax:numeric('propertyTax'),
   maintenanceCosts:numeric('maintenanceCosts'),
