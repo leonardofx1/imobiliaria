@@ -3,7 +3,7 @@ import { db } from "../../db/index.js";
 import { property } from "../../db/schema.js";
 import type { PropertyDto } from "../../dto/propertyDto.js";
 import type { IPropertyRepository } from "./IPropertyRepository.js";
-import { gte, lte } from "zod";
+
 
 
 export class PropertyRepository implements IPropertyRepository {
@@ -34,5 +34,13 @@ export class PropertyRepository implements IPropertyRepository {
         const properties = await db.select().from(property).where(between(property.vacanciesGarage,initialValue ,endValue)) as PropertyDto[]
         return properties 
     }
-     
+    deletePropertyById = async (id:string)=>{
+        const deletePropertie =await  db.delete(property).where(eq(property.id,id)).returning() as PropertyDto[]
+        return deletePropertie
+    }
+ 
+    updateProperty=async(_property:PropertyDto)=> {
+        const updatePropertie = await db.update(property).set(_property).where(eq(property.id,_property.id)).returning() as PropertyDto[]
+        return updatePropertie
+    }
 }
