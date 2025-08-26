@@ -22,12 +22,12 @@ export class PropertyRepository implements IPropertyRepository {
         return properties
     }
     findAllPropertiesOwnerId = async (ownerId: string) => {
-        const propertie = await db.select().from(property).where(eq(property.id, ownerId)) as PropertyDto[]
-        return propertie
+        const _property = await db.select().from(property).where(eq(property.id, ownerId)) as PropertyDto[]
+        return _property
     }
     findByPropertyId = async (id: string) => {
-        const propertie =  await db.select().from(property).where(eq(property.id,id))as PropertyDto[]
-        return propertie
+        const _property =  await db.select().from(property).where(eq(property.id,id))as PropertyDto[]
+        return _property
 
     }
     findPropertiesByPrice = async (initialValue: number, endValue: number) => {
@@ -35,12 +35,12 @@ export class PropertyRepository implements IPropertyRepository {
         return properties 
     }
     deletePropertyById = async (id:string)=>{
-        const deletePropertie =await  db.delete(property).where(eq(property.id,id)).returning() as PropertyDto[]
-        return deletePropertie
+        const deleteProperty =await  db.delete(property).where(eq(property.id,id)).returning() as PropertyDto[]
+        return deleteProperty
     }
  
     updateProperty=async(_property:PropertyDto)=> {
-        const updatePropertie = await db.update(property).set(_property).where(eq(property.id,_property.id)).returning() as PropertyDto[]
-        return updatePropertie
+        const updateProperty = await db.update(property).set(_property).where(eq(property.id,_property.id)).returning() as PropertyDto[]
+        return updateProperty
     }
 }

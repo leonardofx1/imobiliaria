@@ -7,9 +7,9 @@ const userRoles = ['user','admin'] as const
 
 export type UserRoles = typeof userRoles[number]
 
-const propertyStatus = ['rented','available','pending']
 
-export type PropertyStatus = typeof propertyStatus
+
+export type PropertyStatus =  'rented'|'available'|'pending'
 
 export const users = pgTable('users', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
@@ -30,7 +30,7 @@ export const property = pgTable('property', {
   description:text('description').notNull(),
   type:text('type').notNull().$type<PropertyStatus>(),
   vacanciesGarage:integer('vacanciesGarage').notNull(),
-  buildingFloor:text('buildingFloor'),
+  buildingFloor:integer('buildingFloor'),
   price:numeric('price').notNull(),
   ownerId:uuid('ownerId').references(()=> users.id),
   area:numeric('area'),
