@@ -13,10 +13,9 @@ export class UserController {
 
   save = async (req: FastifyRequest, reply: FastifyReply) => {
     try {
-      const { age, email, name, password, role } = createUserValidation.parse(
-        req.body
-      );
-
+      
+      const { age, email, name, password, role } = req.body as CreateUserDto
+      
       const userService = await this.createUser.save(
         new CreateUserDto(name, email, password, age, role)
       );
@@ -25,6 +24,7 @@ export class UserController {
       if (error instanceof UserAlreadyExists) {
         reply.status(409).send({ message: "Esse usuário já existe. " });
       }
+
     }
   };
   login = async (req: FastifyRequest, reply: FastifyReply) => {

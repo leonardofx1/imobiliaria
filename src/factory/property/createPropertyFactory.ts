@@ -2,12 +2,12 @@ import { PropertyRepository } from "../../repository/property/propertyRepository
 import { CreatePropertyService } from "../../services/properties/createProperty.js"
 
 
-const createPropertyFactory =()=> {
+const factoryCreateProperty =()=> {
     const propertyRepository = new PropertyRepository()
 
     return new CreatePropertyService(propertyRepository)
 
 } 
 
-const propertyFactory = createPropertyFactory()
-export {propertyFactory}
+const createPropertyFactory = factoryCreateProperty()
+export {createPropertyFactory}
