@@ -4,21 +4,33 @@ import { createPropertyFactory } from "../../factory/property/createPropertyFact
 import { createPropertyValidation } from "../../validations/property/property.validations.js";
 import { deletePropertyFactory } from "../../factory/property/deletePropertyFactory.js";
 import z from "zod";
+import { updatePropertyFactory } from "../../factory/property/updatePropertyFactory.js";
+import { findAllPropertiesFactory } from "../../factory/property/findAllPropertiesFactory.js";
+import { findAllPropertiesOwnerIdFactory } from "../../factory/property/findAllPropertyOwnerId.js";
 
 
 export const propertyRoutes = (app:FastifyInstance)=> {
-    
-const controllerProperty = new PropertyController(createPropertyFactory,deletePropertyFactory)
 
-app.post('/property',{
+    
+const controllerProperty = new PropertyController(createPropertyFactory,deletePropertyFactory,updatePropertyFactory,findAllPropertiesFactory,findAllPropertiesOwnerIdFactory)
+
+app.post('/',{
     schema:{
         body:createPropertyValidation,
     }
     
 },controllerProperty.save)
-app.patch('/delete:idProperty',{
+app.delete('/delete/:idProperty',{
     schema:{
         params:z.object({idProperty:z.uuid()})
     }
 },controllerProperty.deletePropertyId)
+app.put('/update/:idProperty',{
+    schema:{
+        body:createPropertyValidation,
+        params:z.object({idProperty:z.uuid()})
+    }
+},controllerProperty.updateProperty )
+app.get('/allProperties',controllerProperty.findAllProperties)
+app.get('/allProperties/:ownerId',controllerProperty.findAllPropertiesOwnerId)
 }

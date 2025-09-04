@@ -22,7 +22,9 @@ export class PropertyRepository implements IPropertyRepository {
         return properties
     }
     findAllPropertiesOwnerId = async (ownerId: string) => {
-        const _property = await db.select().from(property).where(eq(property.id, ownerId)) as PropertyDto[]
+        console.log('ownerid',ownerId)
+        const _property = await db.select().from(property).where(eq(property.ownerId, ownerId)) as PropertyDto[]
+ 
         return _property
     }
     findByPropertyId = async (id: string) => {

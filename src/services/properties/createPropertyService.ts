@@ -10,6 +10,7 @@ export class CreatePropertyService implements ICreatePropertyService {
 
     }
     save= async (property: PropertyDto) => {
+        console.log(property)
         const {city,number,street,title,description,type,vacanciesGarage,buildingFloor,price,ownerId,area,bedrooms,bathrooms} = property
         const UUID = randomUUID()
         const idProperty = await this.memoryDb.save(new PropertyDto(UUID,city,number,street,title,description,type,vacanciesGarage,buildingFloor,price,ownerId,area,bedrooms,bathrooms))

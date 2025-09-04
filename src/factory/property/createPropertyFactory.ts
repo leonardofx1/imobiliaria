@@ -1,5 +1,5 @@
 import { PropertyRepository } from "../../repository/property/propertyRepository.js"
-import { CreatePropertyService } from "../../services/properties/createProperty.js"
+import { CreatePropertyService } from "../../services/properties/createPropertyService.js"
 
 
 const factoryCreateProperty =()=> {

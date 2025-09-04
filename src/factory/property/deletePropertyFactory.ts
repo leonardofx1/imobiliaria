@@ -1,5 +1,6 @@
 import { PropertyRepository } from "../../repository/property/propertyRepository.js"
-import { DeletePropertyService } from "../../services/properties/deletePRoperty.js"
+import { DeletePropertyService } from "../../services/properties/deletePropertyService.js"
+
 
 
 export const propertyDeleteFactory = ()=> {

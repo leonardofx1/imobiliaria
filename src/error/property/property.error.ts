@@ -13,3 +13,18 @@ export class PorpertyDeleteError extends Error {
         this.name ='Property delete error.'
     }
 }
+
+
+export class PropertyNotFoundError extends Error {
+    constructor(){
+        super('Propety not found.')
+        this.name = 'Property not found error.'
+    }
+}
+
+export class PropertyNotUpdate extends Error {
+    constructor(){
+        super('Property not update')
+        this.name = 'Property not update'
+    }
+}

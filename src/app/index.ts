@@ -5,7 +5,7 @@ import { serializerCompiler,validatorCompiler } from "fastify-type-provider-zod"
 import { errorGlobal } from "../error/errorGlobal/error.global.js";
 const server = fastify()
 server.register(userRoutes)
-server.register(propertyRoutes)
+server.register(propertyRoutes,{prefix:'/property'})
 server.setSerializerCompiler(serializerCompiler)
 server.setValidatorCompiler(validatorCompiler)
 server.setErrorHandler(errorGlobal
