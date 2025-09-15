@@ -1,4 +1,4 @@
-import { DrizzleQueryError } from "drizzle-orm";
+
 import type { PropertyDto } from "../../dto/propertyDto.js";
 import {
   PropertyNotFoundError,

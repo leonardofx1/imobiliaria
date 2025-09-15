@@ -1,4 +1,4 @@
-import { and, between, eq } from "drizzle-orm";
+import {  between, eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { property } from "../../db/schema.js";
 import type { PropertyDto } from "../../dto/propertyDto.js";
@@ -22,8 +22,9 @@ export class PropertyRepository implements IPropertyRepository {
         return properties
     }
     findAllPropertiesOwnerId = async (ownerId: string) => {
-        console.log('ownerid',ownerId)
+
         const _property = await db.select().from(property).where(eq(property.ownerId, ownerId)) as PropertyDto[]
+
  
         return _property
     }
@@ -33,7 +34,7 @@ export class PropertyRepository implements IPropertyRepository {
 
     }
     findPropertiesByPrice = async (initialValue: number, endValue: number) => {
-        const properties = await db.select().from(property).where(between(property.vacanciesGarage,initialValue ,endValue)) as PropertyDto[]
+        const properties = await db.select().from(property).where(between(property.price,initialValue ,endValue)) as PropertyDto[]
         return properties 
     }
     deletePropertyById = async (id:string)=>{

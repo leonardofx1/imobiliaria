@@ -11,8 +11,10 @@ export class FindPropertyOwnerIdService implements IFindPropertyOwnerId {
     }
     findPropertyOwnerId=async (id:string) => {
         const properties = await this.memoryDb.findAllPropertiesOwnerId(id)
-        console.log('chamou mesmo',properties)
-        if(!properties[0]){
+  
+        if(properties.length === 0){
+        
+
             throw new PropertyNotFoundError()
         }
         return properties

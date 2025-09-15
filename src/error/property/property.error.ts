@@ -25,6 +25,20 @@ export class PropertyNotFoundError extends Error {
 export class PropertyNotUpdate extends Error {
     constructor(){
         super('Property not update')
-        this.name = 'Property not update'
+        this.name = 'Property not update.'
+    }
+}
+
+export class QuantityOfGarageError extends Error {
+    constructor(){
+        super("Invalid quantity of garage space. ")
+        this.name = "Invalid Q uantity of garage space."
+    }
+}
+
+export class PriceError extends Error {
+    constructor(){
+        super('invalid price property.')
+        this.name="Invalid price property."
     }
 }

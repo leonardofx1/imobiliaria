@@ -2,7 +2,7 @@ import type { PropertyStatus } from "../db/schema.js"
 
 
 export class PropertyDto {
-    constructor(public id:string,public city:string, public number: number,public street:string, public title:string,public description:string, public type:PropertyStatus, public vacanciesGarage:number, public buildingFloor:number, public price : string, public ownerId:string,public area:string, public bedrooms:number,public bathrooms:number){
+    constructor(public id:string,public city:string, public number: number,public street:string, public title:string,public description:string, public type:PropertyStatus, public vacanciesGarage:number, public buildingFloor:number, public price : number, public ownerId:string,public area:string, public bedrooms:number,public bathrooms:number){
         this.id = id ?? ''
         this.city =city
         this.street=street ??''

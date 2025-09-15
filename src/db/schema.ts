@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 
 
-import { pgTable,uuid, text, varchar, numeric, integer } from "drizzle-orm/pg-core";
+import { pgTable,uuid, text, varchar, numeric, integer, doublePrecision } from "drizzle-orm/pg-core";
 
 const userRoles = ['user','admin'] as const
 
@@ -31,7 +31,7 @@ export const property = pgTable('property', {
   type:text('type').notNull().$type<PropertyStatus>(),
   vacanciesGarage:integer('vacanciesGarage').notNull(),
   buildingFloor:integer('buildingFloor'),
-  price:numeric('price').notNull(),
+  price:doublePrecision('price').notNull(),
   ownerId:uuid('ownerId').references(()=> users.id),
   area:numeric('area'),
   bedrooms:integer('bedrooms').notNull(),

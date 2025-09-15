@@ -6,13 +6,14 @@ import { deletePropertyFactory } from "../../factory/property/deletePropertyFact
 import z from "zod";
 import { updatePropertyFactory } from "../../factory/property/updatePropertyFactory.js";
 import { findAllPropertiesFactory } from "../../factory/property/findAllPropertiesFactory.js";
-import { findAllPropertiesOwnerIdFactory } from "../../factory/property/findAllPropertyOwnerId.js";
+import { findAllPropertiesOwnerIdFactory } from "../../factory/property/findAllPropertyOwnerIdFactory.js";
+import { findByPropertyIdFactory } from "../../factory/property/findByPropertyIdFactory.js";
 
 
 export const propertyRoutes = (app:FastifyInstance)=> {
 
     
-const controllerProperty = new PropertyController(createPropertyFactory,deletePropertyFactory,updatePropertyFactory,findAllPropertiesFactory,findAllPropertiesOwnerIdFactory)
+const controllerProperty = new PropertyController(createPropertyFactory,deletePropertyFactory,updatePropertyFactory,findAllPropertiesFactory,findAllPropertiesOwnerIdFactory,findByPropertyIdFactory)
 
 app.post('/',{
     schema:{

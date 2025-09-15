@@ -1,5 +1,5 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
-import type { IPropertyController } from "./IProperty.js";
+import type { IdProperty, IPropertyController } from "./IProperty.js";
 
 import { PropertyDto } from "../../dto/propertyDto.js";
 
@@ -12,6 +12,9 @@ import type { IUpdatePropertyService } from "../../services/properties/types/IUp
 
 import type { IFindAllPropertiesService } from "../../services/properties/types/IFindAllPropertiesService.js";
 import type { IFindPropertyOwnerId } from "../../services/properties/types/IFindPropertyOwnerId.js";
+import { DrizzleQueryError } from "drizzle-orm";
+import type { IFindPropertyById } from "../../services/properties/types/IFindPropertyById.Service.js";
+import { errorMapDrizzle } from "../../error/drizzleError/drizzleError.js";
 
 export class PropertyController implements IPropertyController {
   constructor(
@@ -19,7 +22,8 @@ export class PropertyController implements IPropertyController {
     private deletePropertyService: IDeletePropertyService,
     private updatePropertyService: IUpdatePropertyService,
     private findAllPropertyService:IFindAllPropertiesService,
-    private findPropertyOwnerIdService:IFindPropertyOwnerId
+    private findPropertyOwnerIdService:IFindPropertyOwnerId,
+    private findPropertyById:IFindPropertyById
     ) {}
 
   save = async (req: FastifyRequest, reply: FastifyReply) => {
@@ -143,19 +147,41 @@ export class PropertyController implements IPropertyController {
   findAllPropertiesOwnerId=async (req: FastifyRequest<{Params:{ownerId:string}}>, reply: FastifyReply) => {
       try {
         const {ownerId} = req.params
-        console.log('chamouss aqui',ownerId)
+    
         const properties = await this.findPropertyOwnerIdService.findPropertyOwnerId(ownerId)
-        console.log('chamouss aqui',properties)
+
         reply.status(200).send(properties)
 
       } catch (error) {
+        if(error instanceof DrizzleQueryError){
+          const pgError:any = error.cause
+          const mapError =errorMapDrizzle(pgError.code)
+          mapError? reply.status(mapError?.status).send({message:mapError?.message}):reply.status(500).send({message:'Internal server error.'})
+        }
         if(error instanceof PropertyNotFoundError){
           reply.status(404).send({message:'Property not found.'})
         }
       }
   }
+  findByPropertyId=async  (req: FastifyRequest<{Params:IdProperty}>, reply: FastifyReply) => {
+    try {
+        const propertyId = req.params.idProperty
+      const property = await this.findPropertyById.findPropertyById(propertyId)
+
+      reply.status(200).send(property)
+    } catch (error) {
+        if(error instanceof PropertyNotFoundError) {
+          reply.status(404).send({mensagem:'Property not found.'})
+        }
+         if(error instanceof DrizzleQueryError){
+          const pgError:any = error.cause
+          const mapError =errorMapDrizzle(pgError.code)
+          mapError? reply.status(mapError?.status).send({message:mapError?.message}):reply.status(500).send({message:'Internal server error.'})
+        }
+    }
+
+  }
   findAllPropertiesGarage: (req: FastifyRequest, reply: FastifyReply) => void;
-  findByPropertyId: (req: FastifyRequest, reply: FastifyReply) => void;
   
   findPropertiesByPrice: (req: FastifyRequest, reply: FastifyReply) => void;
 }

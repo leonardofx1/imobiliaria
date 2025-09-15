@@ -7,7 +7,7 @@ export interface IPropertyRepository {
     findAllProperties:()=> Promise<PropertyDto[]>
     findPropertiesByPrice:(initialValue:number,endValue:number) => Promise<PropertyDto[]| []>
     findAllPropertiesOwnerId:(ownerId:string) => Promise<PropertyDto[]| []>
-    findAllPropertiesGarage : (amountOfGarage:number)=>Promise<PropertyDto[]>
+    findAllPropertiesGarage : (minQuantityOfGarage:number,maxQuantityOfGarage:number)=>Promise<PropertyDto[]>
     deletePropertyById:(id:string) => Promise<PropertyDto[]>
     updateProperty:(_property:PropertyDto)=> Promise<PropertyDto[]>
 }
