@@ -7,10 +7,12 @@ import type { IFindAllPropertiesGarage } from "./types/IFindAllPropertiesGarageS
 export class FindAllPropertiesGarageService implements IFindAllPropertiesGarage {
     constructor(private memoryDb:IPropertyRepository){}
     findAllPropertiesGarage=async (minQuantityOfGarage: number=0,maxQuantityOfGarage:number=100) => {
+
         if(minQuantityOfGarage >= maxQuantityOfGarage){
             throw new QuantityOfGarageError()
         }
         const properties =await  this.memoryDb.findAllPropertiesGarage(minQuantityOfGarage,maxQuantityOfGarage)
+      
         if(properties.length <= 0 ){
             throw new PropertyNotFoundError()
         }

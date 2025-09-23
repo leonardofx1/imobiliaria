@@ -17,8 +17,8 @@ export class PropertyRepository implements IPropertyRepository {
         const properties =await db.select().from(property) as PropertyDto[]
         return properties
     };
-    findAllPropertiesGarage=async  (amountOfGarage:number) =>{
-        const properties = await db.select().from(property).where(eq(property.vacanciesGarage, amountOfGarage))as PropertyDto[]
+    findAllPropertiesGarage=async  (numberMinOfGaragens:number,numberMaxOfGaragens:number) =>{
+        const properties = await db.select().from(property).where(between(property.vacanciesGarage,numberMinOfGaragens,numberMaxOfGaragens))as PropertyDto[]
         return properties
     }
     findAllPropertiesOwnerId = async (ownerId: string) => {

@@ -18,7 +18,7 @@ describe("create property", () => {
 
     const service = new CreatePropertyService(mockRepo);
     const propertyDto = new PropertyDto(   '', 'SP', 456, 'Rua B', 'Casa', 'Desc', 
-      "available", 2, 0, '800000', 'owner-456', 
+      "available", 2, 0, 800000, 'owner-456', 
       '120m²', 3, 2)
     service.save(propertyDto)
 

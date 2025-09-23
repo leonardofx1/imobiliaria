@@ -7,7 +7,7 @@ export class PropertyCreateError extends Error {
     }
 }
 
-export class PorpertyDeleteError extends Error {
+export class PropertyDeleteError extends Error {
     constructor(){
         super('The property could not be deleted.')
         this.name ='Property delete error.'

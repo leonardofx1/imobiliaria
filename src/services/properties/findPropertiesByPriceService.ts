@@ -9,10 +9,12 @@ export class FindPropertiesByPrice implements IFindProeprtiesByPriceService{
 
     }
     findPropertiesByPrice=async  (minPropertyValue: number, maxPropertyValue: number) => {
+        console.log(minPropertyValue)
         if(minPropertyValue >= maxPropertyValue){
             throw new PriceError()
         }
         const properties = await this.memoryDb.findPropertiesByPrice(minPropertyValue,maxPropertyValue)
+        
         if(properties.length<=0 ){
             throw new PropertyNotFoundError
         }

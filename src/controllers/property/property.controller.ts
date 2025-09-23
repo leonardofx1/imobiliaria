@@ -7,7 +7,7 @@ import { randomUUID } from "node:crypto";
 
 import type { ICreatePropertyService } from "../../services/properties/types/ICreatePropertyService.js";
 import type { IDeletePropertyService } from "../../services/properties/types/IDeletePropertyService.js";
-import { PorpertyDeleteError, PropertyNotFoundError, PropertyNotUpdate } from "../../error/property/property.error.js";
+import { PorpertyDeleteError, PriceError, PropertyNotFoundError, PropertyNotUpdate, QuantityOfGarageError } from "../../error/property/property.error.js";
 import type { IUpdatePropertyService } from "../../services/properties/types/IUpdatePropertyService.js";
 
 import type { IFindAllPropertiesService } from "../../services/properties/types/IFindAllPropertiesService.js";
@@ -15,6 +15,9 @@ import type { IFindPropertyOwnerId } from "../../services/properties/types/IFind
 import { DrizzleQueryError } from "drizzle-orm";
 import type { IFindPropertyById } from "../../services/properties/types/IFindPropertyById.Service.js";
 import { errorMapDrizzle } from "../../error/drizzleError/drizzleError.js";
+import type { IFindProeprtiesByPriceService } from "../../services/properties/types/IFindPropertiesByPriceService.js";
+import type { IFindAllPropertiesGarage } from "../../services/properties/types/IFindAllPropertiesGarageService.js";
+import type {  TMaxAndMinProeprtyPrices, TNumberMinAndMaxOfGaragens } from "../../validations/property/property.validations.js";
 
 export class PropertyController implements IPropertyController {
   constructor(
@@ -23,7 +26,9 @@ export class PropertyController implements IPropertyController {
     private updatePropertyService: IUpdatePropertyService,
     private findAllPropertyService:IFindAllPropertiesService,
     private findPropertyOwnerIdService:IFindPropertyOwnerId,
-    private findPropertyById:IFindPropertyById
+    private findPropertyById:IFindPropertyById,
+    private  findPropertiesByPriceService:IFindProeprtiesByPriceService,
+    private findPropertiesGarage:IFindAllPropertiesGarage,
     ) {}
 
   save = async (req: FastifyRequest, reply: FastifyReply) => {
@@ -129,9 +134,7 @@ export class PropertyController implements IPropertyController {
       if(error instanceof PropertyNotFoundError) {
         reply.status(404).send({message:'property not found could not be updated.'})
       }
-      if(error instanceof PropertyNotUpdate){
-        reply.status(400).send({message:'invalid data for update.'})
-      }
+     
     }
   };
   findAllProperties= async (req: FastifyRequest, reply: FastifyReply) => {
@@ -163,7 +166,7 @@ export class PropertyController implements IPropertyController {
         }
       }
   }
-  findByPropertyId=async  (req: FastifyRequest<{Params:IdProperty}>, reply: FastifyReply) => {
+  findByPropertyById=async  (req: FastifyRequest<{Params:IdProperty}>, reply: FastifyReply) => {
     try {
         const propertyId = req.params.idProperty
       const property = await this.findPropertyById.findPropertyById(propertyId)
@@ -181,7 +184,37 @@ export class PropertyController implements IPropertyController {
     }
 
   }
-  findAllPropertiesGarage: (req: FastifyRequest, reply: FastifyReply) => void;
+  findAllPropertiesGarage=async (req: FastifyRequest, reply: FastifyReply) =>{
+      try {
+          const numberOfGarages = req.body as TNumberMinAndMaxOfGaragens
   
-  findPropertiesByPrice: (req: FastifyRequest, reply: FastifyReply) => void;
+            const properties = await this.findPropertiesGarage.findAllPropertiesGarage(numberOfGarages.numberMinOfGaragens,numberOfGarages.numberMaxOfGaragens)
+          reply.status(200).send(properties)
+      } catch (error) {
+        if(error instanceof PropertyNotFoundError){
+          reply.status(404).send({message:"Property not found"})
+        }
+        if(error instanceof QuantityOfGarageError){
+          reply.status(400).send({message:"Invalid parameters."})
+        }
+      }
+  }
+  
+  findPropertiesByPrice = async (req: FastifyRequest, reply: FastifyReply) => {
+    try {
+      const prices = req.body as TMaxAndMinProeprtyPrices
+      console.log(prices)
+      const properties = await this.findPropertiesByPriceService.findPropertiesByPrice(prices.valueMin,prices.valueMax)
+      reply.status(200).send(properties)
+
+      
+    } catch (error) {
+      if(error instanceof PropertyNotFoundError){
+        reply.status(404).send({message:"Properties not found."})
+      }
+      if(error instanceof PriceError){
+        reply.status(400).send({message:"Invalid parameters."})
+      }
+    }
+  }
 }

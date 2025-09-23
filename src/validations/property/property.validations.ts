@@ -22,3 +22,14 @@ export const createPropertyValidation = z.object( {
 
 
 })
+export const maxAndMinProeprtyPrices = z.object({
+    valueMin:z.number().default(0),
+    valueMax:z.number().default(100000000)
+})
+export type TMaxAndMinProeprtyPrices = z.infer<typeof maxAndMinProeprtyPrices>
+export const numberMinAndMaxOfGaragens =z.object({
+    numberMinOfGaragens:z.number().default(0),
+    numberMaxOfGaragens:z.number().default(30)
+})
+
+export type TNumberMinAndMaxOfGaragens = z.infer<typeof numberMinAndMaxOfGaragens>
