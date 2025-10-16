@@ -5,11 +5,9 @@ export class UserLoginDto {
     constructor( public email:string, public password:string){
         this.email = email
         this.password = password
-
     }
 
 }
-
 export class UserReturnLoginDto {
     constructor(public id:string ,public name:string, public email:string, public age:number, public role?:UserRoles) {
         this.id= id

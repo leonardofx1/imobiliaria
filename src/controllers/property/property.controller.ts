@@ -7,7 +7,7 @@ import { randomUUID } from "node:crypto";
 
 import type { ICreatePropertyService } from "../../services/properties/types/ICreatePropertyService.js";
 import type { IDeletePropertyService } from "../../services/properties/types/IDeletePropertyService.js";
-import { PorpertyDeleteError, PriceError, PropertyNotFoundError, PropertyNotUpdate, QuantityOfGarageError } from "../../error/property/property.error.js";
+import {  PropertyDeleteError,PriceError, PropertyNotFoundError, QuantityOfGarageError } from "../../error/property/property.error.js";
 import type { IUpdatePropertyService } from "../../services/properties/types/IUpdatePropertyService.js";
 
 import type { IFindAllPropertiesService } from "../../services/properties/types/IFindAllPropertiesService.js";
@@ -86,16 +86,16 @@ export class PropertyController implements IPropertyController {
         reply.code(204).send();
       }
     } catch (error) {
-      if (error instanceof PorpertyDeleteError) {
+      if (error instanceof PropertyDeleteError) {
         reply
           .code(404)
           .send({ error: "Property not found or already deleted." });
       }
     }
   };
-  updateProperty = async (req: FastifyRequest<{Params:{idProperty:string}}>, reply: FastifyReply) => {
+  updateProperty = async (req: FastifyRequest, reply: FastifyReply) => {
     try {
-      const { idProperty } = req.params;
+      const { idProperty } = req.params as {idProperty:string}
       
       const {
         city,
@@ -128,6 +128,7 @@ export class PropertyController implements IPropertyController {
           bedrooms,
           bathrooms
         ))
+       
         reply.status(204)
     } catch (error) {
    
@@ -139,6 +140,7 @@ export class PropertyController implements IPropertyController {
   };
   findAllProperties= async (req: FastifyRequest, reply: FastifyReply) => {
     try {
+      
           const properties = await this.findAllPropertyService.findAllProperties()
           reply.status(200).send(properties)
     } catch (error) {
