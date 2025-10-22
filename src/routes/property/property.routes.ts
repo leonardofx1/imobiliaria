@@ -10,7 +10,7 @@ import { findAllPropertiesOwnerIdFactory } from "../../factory/property/findAllP
 import { findByPropertyIdFactory } from "../../factory/property/findByPropertyIdFactory.js";
 import { findAllPropertiesGarageFactory } from "../../factory/property/findAllPropertiesGarageServiceFactory.js";
 import { findPropertiesByPriceFactory } from "../../factory/property/findPropertiesByPriceFactory.js";
-import { PropertyDto } from "../../dto/propertyDto.js";
+
 import type { ZodTypeProvider } from "fastify-type-provider-zod";
 const propertyResponseSchema = z.object({
   id: z.string(),
@@ -39,9 +39,13 @@ app.withTypeProvider<ZodTypeProvider>().post('/create',{
     
     schema:{
         tags:['property'],
-        description:'creat a property in the database',
-        summary:'creat a property.',
+        description:'create a property in the database',
+        summary:'create a property.',
         body:createPropertyValidation,
+        response:{
+            201:z.object({message:z.string()}),
+            500:z.object({message:z.string()})
+        }
     }
     
 },controllerProperty.save)
@@ -51,43 +55,79 @@ app.withTypeProvider<ZodTypeProvider>().delete('/delete/:idProperty',{
         tags:['property'],
         summary:'delete a property.',
         description:'should delete the database property.',
-        params:z.object({idProperty:z.uuid()})
+        params:z.object({idProperty:z.uuid()}),
+        response:{
+            204:z.object({message:z.string()}),
+            404:z.object({message:z.string()}),
+        }
     }
 },controllerProperty. deletePropertyId)
 app.withTypeProvider<ZodTypeProvider>().put('/update/:idProperty',{
     
     schema:{
         tags:['property'],
+        summary:'update property',
+        description:'Identifies the property by its ID and updates its data.',
         body:createPropertyValidation,
-        params:z.object({idProperty:z.uuid()})
+        params:z.object({idProperty:z.uuid()}),
+        response:{
+            204:z.object({message:z.string()}),
+            404:z.object({message:z.string()})
+        }
     },
     onRequest:[app.authenticate]
 },controllerProperty.updateProperty )
+
 app.get('/allProperties',{onRequest:[app.authenticate],schema:{
     tags: ['Properties'], 
-    summary: 'Listar todas as propriedades',
-    description: 'Retorna todas as propriedades do usuário autenticado',
-
-    
+    summary: 'list all properties.',
+    description: 'Returns all properties of the authenticated user.',
     response:{
-        200:propertyResponseSchema
+        200:propertyResponseSchema,
+        404:z.object({message:z.string()})
     }
 }},controllerProperty.findAllProperties)
+
 app.withTypeProvider<ZodTypeProvider>().get('/allProperties/:ownerId',{schema:{
     tags:['property'],
+    summary:'filters by property',
+    description:'filters by properties ownerid',
     response:{
-        200:z.array(propertyResponseSchema)
+        200:z.array(propertyResponseSchema),
+        404:z.object({message:z.string()})
     }
 }},controllerProperty.findAllPropertiesOwnerId)
+
 app.withTypeProvider<ZodTypeProvider>().get('/propertiesById/:idProperty',{schema:{
     tags:['property'],
+    summary:'filter by idProperty',
+    description:'filter by property idProperty',
+    response:{
+        200:propertyResponseSchema,
+        404:z.object({message:z.string()}),
+    }
 }},controllerProperty.findByPropertyById)
+
 app.withTypeProvider<ZodTypeProvider>().post('/garage',{schema:{
     tags:['property'],
-    body:numberMinAndMaxOfGaragens
+    summary:'filter by garage.',
+    description:'filters properties by a garage range.',
+    body:numberMinAndMaxOfGaragens,
+    response:{
+        200:z.array(propertyResponseSchema),
+        404:z.object({message:z.string()}),
+        400:z.object({message:z.string()})
+    }
 }},controllerProperty.findAllPropertiesGarage)
 app.withTypeProvider<ZodTypeProvider>().post('/price',{schema:{
     tags:['property'],
-    body:maxAndMinProeprtyPrices
+    summary:'filter for price.',
+    description:'filters properties by a price range',
+    body:maxAndMinProeprtyPrices,
+    response:{
+        200:z.array(propertyResponseSchema),
+        404:z.object({message:z.string()}),
+        400:z.object({message:z.string()})
+    }
 }},controllerProperty.findPropertiesByPrice)
 }

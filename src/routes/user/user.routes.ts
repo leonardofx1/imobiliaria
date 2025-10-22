@@ -13,6 +13,7 @@ export const userRoutes = async (app: FastifyInstance) => {
     "/user",
     {
       schema: {
+        tags:['user'],
         summary: "Create user",
         description: "Creates and validates a user and returns a JWT token.",
         body: createUserValidation,
@@ -27,7 +28,14 @@ export const userRoutes = async (app: FastifyInstance) => {
 
   app.post(
     "/user/login",
-    { onRequest: [app.authenticate] },
+    { onRequest: [app.authenticate] ,
+      schema:{
+        tags:['user'],
+        description:'validates the login credentials and returns an authentication token.',
+        summary:'login and authentication.',
+
+      }
+    },
     userControler.login
   );
 };

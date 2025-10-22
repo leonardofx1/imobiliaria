@@ -7,12 +7,19 @@ import{ fastifyJwt,} from "@fastify/jwt";
 import { authenticate } from "../utils/jwt/hookAuthenticate.js";
 import fastifySwaggerUi from '@fastify/swagger-ui';
 import fastifySwagger from "@fastify/swagger";
-import z from "zod";
+import fastifyMultipart from "@fastify/multipart";
+import { imgRoutes } from "../routes/img/img.routes.js";
+import fastifyStatic from "@fastify/static";
+import path from 'path'
 export const server = fastify()
 server.setSerializerCompiler(serializerCompiler)
 server.setValidatorCompiler(validatorCompiler)
-server.setErrorHandler(errorGlobal
-)
+server.setErrorHandler(errorGlobal)
+server.register(fastifyMultipart,{
+  limits:{
+    fieldSize:10*1024*1024
+  }
+})
 server.register(fastifyJwt,{secret:'my-secret'})
 server.decorate('authenticate',authenticate)
 server.register(fastifySwagger,{
@@ -26,6 +33,10 @@ server.register(fastifySwagger,{
     transform: jsonSchemaTransform,
 
 })
+server.register(fastifyStatic,{
+    root:path.join(process.cwd(),'uploads'),
+    prefix:'/uploads/'
+})
 server.register(fastifySwaggerUi,{routePrefix:'docs',uiConfig:{
     docExpansion:"full",
     deepLinking:true
@@ -34,18 +45,8 @@ server.after(() => {
     
 server.register(userRoutes)
 server.register(propertyRoutes)
+server.register(imgRoutes)
 
-  server.withTypeProvider<ZodTypeProvider>().get('/hello', {
-    schema: {
-      response: {
-        200: z.object({
-          message: z.string(),
-        }),
-      },
-    },
-  }, async (request, reply) => {
-    return reply.send({ message: 'Hello world!' })
-  });
 })
 const start =async  () => {
     try {

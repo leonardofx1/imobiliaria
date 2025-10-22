@@ -1,8 +1,7 @@
 
 import type { PropertyDto } from "../../dto/propertyDto.js";
 import {
-  PropertyNotFoundError,
-  PropertyNotUpdate,
+  PropertyNotFoundError
 } from "../../error/property/property.error.js";
 import type { IPropertyRepository } from "../../repository/property/IPropertyRepository.js";
 import type { IUpdatePropertyService } from "./types/IUpdatePropertyService.js";

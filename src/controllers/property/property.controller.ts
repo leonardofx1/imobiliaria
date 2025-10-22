@@ -83,13 +83,13 @@ export class PropertyController implements IPropertyController {
         idProperty
       );
       if (isDeleted) {
-        reply.code(204).send();
+        reply.code(204).send({message:'successfully deleted.'});
       }
     } catch (error) {
       if (error instanceof PropertyDeleteError) {
         reply
           .code(404)
-          .send({ error: "Property not found or already deleted." });
+          .send({ message: "Property not found or already deleted." });
       }
     }
   };
@@ -129,7 +129,7 @@ export class PropertyController implements IPropertyController {
           bathrooms
         ))
        
-        reply.status(204)
+        reply.status(204).send({message:'successfully update.'})
     } catch (error) {
    
       if(error instanceof PropertyNotFoundError) {
