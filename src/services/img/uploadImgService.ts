@@ -23,7 +23,7 @@ export class UploadImgService implements IUpLoadImgService{
     }
     save= async (file: MultipartFile) => {
     
-          const pump = promisify(pipeline)
+        const pump = promisify(pipeline)
         const type = file.mimetype
         const fileName = file.filename
         const imgFile = file.file

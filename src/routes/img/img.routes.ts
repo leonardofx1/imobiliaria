@@ -13,7 +13,7 @@ export const imgRoutes = (app:FastifyInstance) => {
         schema:{
             tags:['image'],
             summary:'upload of image.',
-            description:'realizar o upload de uma imagem e retornar seu endereço de acesso.',
+            description:'upload an image and return its access address.',
             
         response:{
             201:z.string(),
