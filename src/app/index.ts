@@ -11,7 +11,7 @@ import fastifyMultipart from "@fastify/multipart";
 import { imgRoutes } from "../routes/img/img.routes.js";
 import fastifyStatic from "@fastify/static";
 import path from 'path'
-export const server = fastify()
+export const server = fastify({forceCloseConnections:true})
 server.setSerializerCompiler(serializerCompiler)
 server.setValidatorCompiler(validatorCompiler)
 server.setErrorHandler(errorGlobal)
@@ -20,7 +20,10 @@ server.register(fastifyMultipart,{
     fieldSize:10*1024*1024
   }
 })
-server.register(fastifyJwt,{secret:'my-secret'})
+import dotenv from 'dotenv'
+import { rentalRoutes } from "../routes/rental/rental.routes.js";
+dotenv.config()
+server.register(fastifyJwt,{secret:process.env.SECRET_JWT as string})
 server.decorate('authenticate',authenticate)
 server.register(fastifySwagger,{
     openapi:{
@@ -43,9 +46,10 @@ server.register(fastifySwaggerUi,{routePrefix:'docs',uiConfig:{
 }})
 server.after(() => {
     
-server.register(userRoutes)
-server.register(propertyRoutes)
+server.register(userRoutes,{prefix:'/user'})
+server.register(propertyRoutes,{prefix:'/property'})
 server.register(imgRoutes)
+server.register(rentalRoutes,{prefix:'/rental'})
 
 })
 const start =async  () => {

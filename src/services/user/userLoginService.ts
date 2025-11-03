@@ -13,6 +13,7 @@ export class UserLoginService implements IUserLoginService {
     login =  async (user: UserLoginDto) => {
         
        const getUser = await  this.userDb.findByEmail(user.email)
+
        if(!getUser  || getUser.length <= 0  ) {
          throw new UserNotFound()
        }
@@ -23,8 +24,5 @@ export class UserLoginService implements IUserLoginService {
         }
         const {email, id,age,name,role} = getUser[0] as IUserReturnLogin
         return new UserReturnLoginDto(id,name,email,age,role?? 'user')
-        
-     
-
     }
 }

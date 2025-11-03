@@ -29,6 +29,7 @@ export class UserController {
     }
   };
   login = async (req: FastifyRequest, reply: FastifyReply) => {
+  
     try {
       const { email, password } = loginUserValidate.parse(req.body)
       const userDto = new UserLoginDto(email, password)
@@ -37,16 +38,25 @@ export class UserController {
         sub:userLog.id,
         role: userLog.role
       }
-      const token = reply.jwtSign(payload,{expiresIn:"1h"})
-
-      reply.status(200).send(token)
+     const token =await reply.jwtSign(payload,{expiresIn:"1h"})
+  
+      reply.header('authorization',`Bearer ${token}`).status(200).send({
+        id:userLog.id,
+        email:userLog.email,
+        name:userLog.name,
+        age:userLog.age,
+        role:userLog.role
+        
+      })
     } catch (error) {
+      console.error(error)
       if (error instanceof CredentialsInvalid) {
         reply.status(401).send({ message: 'Credenciais inválidas' })
       }
       if (error instanceof UserNotFound) {
         reply.status(404).send({ message: 'Usuário não encontrado' })
       }
+    reply.status(500).send({message: "internal server error" })
     }
   };
 }

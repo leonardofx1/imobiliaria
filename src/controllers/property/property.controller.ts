@@ -32,41 +32,14 @@ export class PropertyController implements IPropertyController {
     ) {}
 
   save = async (req: FastifyRequest, reply: FastifyReply) => {
-    try {
-      const {
-        city,
-        area,
-        bathrooms,
-        bedrooms,
-        description,
-        number,
-        ownerId,
-        price,
-        street,
-        title,
-        type,
-        vacanciesGarage,
-        buildingFloor,
-      } = req.body as PropertyDto;
-      const uuid = randomUUID();
 
+    try {
+      const property = req.body as PropertyDto;
+      const uuid = randomUUID();
+      property.id = uuid
       this.savePropertyService.save(
-        new PropertyDto(
-          uuid,
-          city,
-          number,
-          street,
-          title,
-          description,
-          type,
-          vacanciesGarage,
-          buildingFloor,
-          price,
-          ownerId,
-          area,
-          bedrooms,
-          bathrooms
-        )
+        PropertyDto.create(property)
+        
       );
       reply
         .status(201)
@@ -97,37 +70,9 @@ export class PropertyController implements IPropertyController {
     try {
       const { idProperty } = req.params as {idProperty:string}
       
-      const {
-        city,
-        area,
-        bathrooms,
-        bedrooms,
-        description,
-        number,
-        ownerId,
-        price,
-        street,
-        title,
-        type,
-        vacanciesGarage,
-        buildingFloor,
-      } = req.body as PropertyDto;
-      await this.updatePropertyService.update( new PropertyDto(
-          idProperty,
-          city,
-          number,
-          street,
-          title,
-          description,
-          type,
-          vacanciesGarage,
-          buildingFloor,
-          price,
-          ownerId,
-          area,
-          bedrooms,
-          bathrooms
-        ))
+      const proeprty = req.body as PropertyDto;
+      await this.updatePropertyService.update(  PropertyDto.create(proeprty))
+   
        
         reply.status(204).send({message:'successfully update.'})
     } catch (error) {

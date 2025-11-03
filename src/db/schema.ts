@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 
 
-import { pgTable,uuid, text, varchar, numeric, integer, doublePrecision } from "drizzle-orm/pg-core";
+import { pgTable,uuid, text, varchar, numeric, integer, doublePrecision, PgDate, date } from "drizzle-orm/pg-core";
 
 const userRoles = ['user','admin'] as const
 
@@ -28,7 +28,7 @@ export const property = pgTable('property', {
 
   title:text('title').notNull(),
   description:text('description').notNull(),
-  type:text('type').notNull().$type<PropertyStatus>(),
+  status:text('status').notNull().$type<PropertyStatus>(),
   vacanciesGarage:integer('vacanciesGarage').notNull(),
   buildingFloor:integer('buildingFloor'),
   price:doublePrecision('price').notNull(),
@@ -44,4 +44,16 @@ export const expenses = pgTable('expenses', {
   condoFee:numeric('condoFee'),
   propertyTax:numeric('propertyTax'),
   maintenanceCosts:numeric('maintenanceCosts'),
+})
+export const rental = pgTable('rental', {
+    id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
+
+    idUser: uuid('idUser').references(() => users.id).notNull(),
+    idProperty:uuid('idProperty').references(()=> property.id).notNull(),
+    startDate:date('startDate',{mode:'date'}).notNull(),
+    endDate:date('endDate',{mode:'date'}).notNull(),
+    createdAt:date('createdAt',{mode:'date'}).notNull().default(sql`now()`),
+
+    payment:doublePrecision('payment').notNull()
+
 })
