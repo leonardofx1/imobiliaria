@@ -1,13 +1,18 @@
 import type { FastifyInstance } from "fastify";
-import { rentalFactory } from "../../factory/rental/rentalFactory.js";
+import { createRentalFactory } from "../../factory/rental/createRentalFactory.js";
 import { RentalController } from "../../controllers/rental/rental.controller.js";
+import { deleteRentalFactory } from "../../factory/rental/deleteRentalFactory.js";
+import { updateRentalFactory } from "../../factory/rental/uploadRentalFactory.js";
+import { getRentalFactory } from "../../factory/rental/getRentalFactory.js";
 
 
 
 
 
 export const rentalRoutes = (app:FastifyInstance)=> {
-    const rental = new RentalController(rentalFactory)
+
+    const rental = new RentalController(createRentalFactory,deleteRentalFactory,updateRentalFactory,getRentalFactory)
+    
     app.post('/create',{
         schema :{
             tags:["rental"],

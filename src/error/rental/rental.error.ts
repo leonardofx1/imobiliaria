@@ -1,6 +1,6 @@
 
 
-export class ValidateRentalError extends Error {
+export class  ValidateStatusPropertyError extends Error {
     constructor(){
         super('Property unavaible for rent.')
         this.message = 'property rent error.'
