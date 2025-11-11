@@ -12,6 +12,7 @@ export class UpdateRentalService implements IUpdateRentalService {
     if (res) {
       return true;
     }
+
     throw new UpdateRentalError();
   };
 }

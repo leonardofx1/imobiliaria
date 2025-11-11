@@ -5,9 +5,9 @@ import { FindAllPropertiesGarageService } from "../findAllPropertyGarageService.
 import { PropertyNotFoundError, QuantityOfGarageError } from "../../../error/property/property.error.js";
 
 
-describe('findAllPropertiesGarageService',async ()=> {
+describe('findAllPropertiesGarageService', ()=> {
 
-    test("it should by possible to filter properties by the number of garages.", ()=> {
+    test("it should by possible to filter properties by the number of garages.",async ()=> {
             const mockRepo: IPropertyRepository = {
       save: vi.fn(),
       deletePropertyById: vi.fn(),
@@ -24,9 +24,9 @@ describe('findAllPropertiesGarageService',async ()=> {
     };
 
     const service = new FindAllPropertiesGarageService(mockRepo)
-    expect(service.findAllPropertiesGarage(0,15)).resolves.toHaveLength(2)
+    await expect(service.findAllPropertiesGarage(0,15)).resolves.toHaveLength(2)
     })
-    test('filter parameters of propiertes by number of garages invalid', ()=> {
+    test('filter parameters of propiertes by number of garages invalid',async ()=> {
                 const mockRepo: IPropertyRepository = {
       save: vi.fn(),
       deletePropertyById: vi.fn(),
@@ -42,9 +42,9 @@ describe('findAllPropertiesGarageService',async ()=> {
       updateProperty: vi.fn(),
     };
     const service = new FindAllPropertiesGarageService(mockRepo)
-    expect(service.findAllPropertiesGarage(20,10)).rejects.toThrow(QuantityOfGarageError)
+     await expect(service.findAllPropertiesGarage(20,10)).rejects.toThrow(QuantityOfGarageError)
     })
-    test("it should not be possible to filter by the number of garages.", ()=> {
+    test("it should not be possible to filter by the number of garages.", async ()=> {
                  const mockRepo: IPropertyRepository = {
       save: vi.fn(),
       deletePropertyById: vi.fn(),
@@ -57,6 +57,6 @@ describe('findAllPropertiesGarageService',async ()=> {
     };
     const service = new FindAllPropertiesGarageService(mockRepo)
 
-    expect(service.findAllPropertiesGarage(0, 10)).rejects.toThrow(PropertyNotFoundError)
+     await expect(service.findAllPropertiesGarage(0, 10)).rejects.toThrow(PropertyNotFoundError)
     })
 })

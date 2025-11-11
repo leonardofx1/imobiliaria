@@ -68,7 +68,7 @@ export class PropertyController implements IPropertyController {
   };
   updateProperty = async (req: FastifyRequest, reply: FastifyReply) => {
     try {
-      const { idProperty } = req.params as {idProperty:string}
+
       
       const proeprty = req.body as PropertyDto;
       await this.updatePropertyService.update(  PropertyDto.create(proeprty))

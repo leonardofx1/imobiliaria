@@ -27,6 +27,7 @@ export class DeleteRentalService implements IDeleteRentalPropertyService {
        }
         getPropertyById = async (idProperty: string) => {
            const property = await this.propertyDb.findByPropertyId(idProperty);
+
            if (property[0]as PropertyDto & { id: string }) {
        
 

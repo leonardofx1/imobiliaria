@@ -1,4 +1,4 @@
-import type { RentalPropertyDto, RentalPropertyReturning } from "../../../dto/propertyDto.js";
+import type { RentalPropertyReturning } from "../../../dto/propertyDto.js";
 
 
 export interface IUpdateRentalService {

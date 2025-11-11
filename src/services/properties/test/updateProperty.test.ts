@@ -56,7 +56,7 @@ describe("update property.", () => {
         expect(mockRepo.findByPropertyId).toHaveBeenCalledWith(existingProperty.id);
         expect(mockRepo.updateProperty).toHaveBeenCalledWith(mergeProperty);
     });
-    test("it should not be possible to update the property.", () => {
+    test("it should not be possible to update the property.",async  () => {
         const property = new PropertyDto(
             "1",
             "SP",
@@ -86,6 +86,6 @@ describe("update property.", () => {
         };
 
         const service = new UpdatePropertyService(mockRepo);
-        expect(service.update(property)).rejects.Throw(PropertyNotFoundError);
+     await expect(service.update(property)).rejects.Throw(PropertyNotFoundError);
     });
 });

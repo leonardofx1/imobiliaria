@@ -11,7 +11,6 @@ import {
   RentalNotFoundError,
   UpdateRentalError,
   ValidateDateError,
-  ValidateRentalError,
 } from "../../error/rental/rental.error.js";
 import type { ICreateRentalProperty } from "../../services/rental/types/IRentalProperty.js";
 import type { IDeleteRentalPropertyService } from "../../services/rental/types/IDeleteRentalPropertyService.js";
@@ -47,11 +46,7 @@ export class RentalController implements IRentalController {
           details: error.message,
         });
       }
-      if (error instanceof ValidateRentalError) {
-        reply
-          .status(400)
-          .send({ error: "validation error", message: "error validate ",details:error.message });
-      }
+  
       if(error instanceof ValidateDateError){
         reply.status(400).send({error:"Date Error",message:"start date greater than end date. ",details:error.message})
       }
