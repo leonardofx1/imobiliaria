@@ -4,6 +4,8 @@ import { RentalController } from "../../controllers/rental/rental.controller.js"
 import { deleteRentalFactory } from "../../factory/rental/deleteRentalFactory.js";
 import { updateRentalFactory } from "../../factory/rental/uploadRentalFactory.js";
 import { getRentalFactory } from "../../factory/rental/getRentalFactory.js";
+import { rentalCreate, rentalReturning } from "../../validations/rental/rental.validations.js";
+import z from "zod";
 
 
 
@@ -17,7 +19,16 @@ export const rentalRoutes = (app:FastifyInstance)=> {
         schema :{
             tags:["rental"],
             tile:"renting a property",
-            description:"you should create a property lease agreement."
+            description:"you should create a property lease agreement.",
+            body:rentalCreate,
+            response:{
+                200:z.object({message:z.string()}),
+                400:z.object({
+                    error:z.string(),
+                    message:z.string(),
+                    details:z.string()
+                })
+            }
         }
     }
     ,rental.create)
@@ -25,7 +36,11 @@ export const rentalRoutes = (app:FastifyInstance)=> {
         schema:{
             tags:["rental"],
             title:"delete rental",
-            description:"You delete a lease agreement by the lease ID."
+            description:"You delete a lease agreement by the lease ID.",
+            response: {
+                204:z.object({message:z.string()}),
+                400:z.object({message:z.string()})
+            }
         }
     },rental.delete)
     app.post('/update',{
@@ -33,6 +48,10 @@ export const rentalRoutes = (app:FastifyInstance)=> {
             tags:['rental'],
             title:"update rent",
             description:"you should update the property rent",
+            response:{
+                200:z.object({message:z.string()}),
+                400:z.object({message:z.string()})
+            }
         }
     }, rental.update)
     app.get('/:id',{
@@ -40,6 +59,15 @@ export const rentalRoutes = (app:FastifyInstance)=> {
             tags:['rental'],
             title:"get a rental ",
             description:"get rent by identification",
+            response:{
+                200:rentalReturning,
+                404:z.object({
+                    error:z.string(),
+                    message:z.string(),
+                    details:z.string()
+                })
+                
+            }
 
         }
     },rental.getRental)

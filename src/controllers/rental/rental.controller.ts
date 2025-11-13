@@ -36,9 +36,9 @@ export class RentalController implements IRentalController {
         )
       );
 
-      reply.status(203).send({ message: "Sucessfully rented." });
+      reply.status(200).send({ message: "Sucessfully rented." });
     } catch (error) {
-      console.error(error)
+
       if (error instanceof PaymentRentalError) {
         reply.status(400).send({
           error: "Payment error",
@@ -55,7 +55,6 @@ export class RentalController implements IRentalController {
   delete = async (req: FastifyRequest, reply: FastifyReply) => {
     try {
       const { idRental } = req.params as { idRental: string };
-      console.log(idRental)
       this.deleteRental.deleteRental(idRental);
       reply.status(204).send({ message: "delete successfully from rent." });
     } catch (error) {
@@ -69,6 +68,7 @@ export class RentalController implements IRentalController {
          RentalPropertyReturning.create(rental)
         
       );
+      reply.status(200).send({message:"update succesfully."})
     } catch (error) {
       if (error instanceof UpdateRentalError) {
         reply.status(400).send({ message: new UpdateRentalError().message });
